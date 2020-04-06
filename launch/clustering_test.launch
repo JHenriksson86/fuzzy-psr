@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node pkg="fuzzy_psr" type="fuzzy_psr_clustering_test" name="fuzzy_psr_clustering_test" output="screen">
+	  <param name="filepath" value="$(find fuzzy_psr)/data/"/>
+	  <param name="filename" value="model.txt"/>
+	</node>
+
+</launch>
