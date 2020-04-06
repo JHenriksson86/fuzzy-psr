@@ -123,16 +123,15 @@ namespace fuzzy_psr
 		cout << "Updating distance matrix\n";
 		Eigen::MatrixXd ones;
 		ones.setOnes(1, number_of_points_);
-		Eigen::MatrixXd test;
 		
 		for(int i = 0;i < number_of_clusters_; i++)
 		{
 			cout << "loop " << i << "\n";
-			Eigen::Vector3d test2 = clusters_.col(0);
+			//Eigen::MatrixXd difference = clusters_.col(0)*ones-*points_;
 			//Eigen::MatrixXd temp = clusters_.col(i)*ones;
 			//Eigen::MatrixXd temp = Eigen::MatrixXd::Ones(3, number_of_points_);
 			//temp = temp.array().square();
-			distance_matrix_.row(i) = (test2*ones-*points_).colwise().sum();
+			distance_matrix_.row(i) = (clusters_.col(0)*ones-*points_).colwise().squaredNorm();
 			//test = test2*ones;
 			//.array().square().colwise().sum();
 
