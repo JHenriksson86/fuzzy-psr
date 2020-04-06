@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(fuzzy_psr)
 
 add_compile_options(-std=c++11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -msse -msse2 -msse3 -mavx")
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
