@@ -112,21 +112,21 @@ namespace fuzzy_psr
 	{
 		cout << "Updating cluster centers\n";
 		partition_squared_ = partition_matrix_.array().pow(2);
-
+		
 		clusters_ = (*points_ * partition_squared_.transpose()).cwiseQuotient(
-			Eigen::Vector3d::Ones() * partition_squared_.rowwise().sum().transpose()
+			Vector3d::Ones() * partition_squared_.rowwise().sum().transpose()
 		);
 	}
 
 	void FuzzyClustering3D::updateDistanceMatrix()
 	{
-		cout << "Updating distance matrix\n";
-		Eigen::MatrixXd ones;
-		ones.setOnes(1, number_of_points_);
+		cout << "Updating distance matrix, rows=" 
+			<< distance_matrix_.rows()  << " cols=" 
+			<< distance_matrix_.cols() << "\n";
 		for(int i = 0;i < number_of_clusters_; i++)
 		{
-			cout << "loop " << i << "\n";
-			distance_matrix_.row(i) = (clusters_.col(i)*ones-*points_).colwise().squaredNorm().eval();
+			cout << "Loop " << i << "\n";
+			distance_matrix_.row(i) = (points_->colwise()-clusters_.col(i)).colwise().squaredNorm();
 		}
 	}
 
